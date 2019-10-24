@@ -1,0 +1,161 @@
+﻿@model IEnumerable<Don_SampleTrackingApp.ProbaModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProbaModelId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPrelevare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiglaFurnizor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sarja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diametru)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calitate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumarCuptor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipTratamentTermic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipCapBara)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipproba)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ObservatiiOperator)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPreluare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRaspunsCalitate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeUtilizatorCalitate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RezultatProba)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KV1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KV2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KV3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temperatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DuritateHB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ObservatiiCalitate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProbaModelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPrelevare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiglaFurnizor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sarja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diametru)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumarCuptor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipTratamentTermic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipCapBara)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipproba)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObservatiiOperator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPreluare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataRaspunsCalitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeUtilizatorCalitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RezultatProba)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KV1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KV2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KV3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DuritateHB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObservatiiCalitate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProbaModelId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProbaModelId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProbaModelId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

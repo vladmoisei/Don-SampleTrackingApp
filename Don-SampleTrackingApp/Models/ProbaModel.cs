@@ -10,6 +10,7 @@ namespace Don_SampleTrackingApp
     public class ProbaModel
     {
         [Key]
+        [DisplayName("Id")]
         public int ProbaModelId { get; set; }        
         [MaxLength(100)]
         [DisplayName("Data prelevare")]

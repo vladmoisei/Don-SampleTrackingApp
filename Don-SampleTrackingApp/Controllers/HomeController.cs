@@ -15,11 +15,6 @@ namespace Don_SampleTrackingApp.Controllers
             return View();
         }
 
-        public IActionResult Proba()
-        {
-            return Json(new { vlad = "asd", li = 2, User = new TrackingUser { UserId = 1, UserName = "usernameDeProba" } });
-        }
-
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

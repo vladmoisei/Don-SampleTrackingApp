@@ -35,3 +35,15 @@ body {
         display: none;
     }
 }
+
+/* Logica adaugata de mine
+    *
+    *
+    *
+*/
+
+/*Fac la acelasi nivel text la creare item*/
+.fix-height {
+    height: 40px;
+    /*line-height: 2.8;*/
+}
