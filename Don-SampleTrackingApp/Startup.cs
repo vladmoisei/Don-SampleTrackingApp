@@ -34,7 +34,7 @@ namespace Don_SampleTrackingApp
 
             // @"Server=172.16.4.165\SQLEXPRESS;Database=ColctareDataAjustajDatabase;
             services.AddDbContext<RaportareDbContext>(options =>
-            options.UseSqlServer(@"Server=172.16.4.165\SQLEXPRESS;Database=ColctareDataAjustajDatabase;User Id=user; Password=Calarasi81; MultipleActiveResultSets=true;"));
+            options.UseSqlServer(@"Server=172.16.4.165\SQLEXPRESS;Database=TrackingSampleDatabase;User Id=user; Password=Calarasi81; MultipleActiveResultSets=true;"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -8,6 +8,7 @@ namespace Don_SampleTrackingApp
 {
     public class TrackingUser
     {
+        [Key]
         public int UserId { get; set; }
         [Required]
         [MaxLength(100)]
