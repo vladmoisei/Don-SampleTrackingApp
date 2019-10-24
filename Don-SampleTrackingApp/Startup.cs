@@ -37,6 +37,10 @@ namespace Don_SampleTrackingApp
             options.UseSqlServer(@"Server=172.16.4.165\SQLEXPRESS;Database=TrackingSampleDatabase;User Id=user; Password=Calarasi81; MultipleActiveResultSets=true;"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // Add session
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +59,9 @@ namespace Don_SampleTrackingApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            // Use session 
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
