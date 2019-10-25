@@ -179,5 +179,11 @@ namespace Don_SampleTrackingApp.Controllers
             return View(probaModel);
         }
 
+        // Create Rezultat proba Calitate (De fapt este un Edit la o proba deja existenta)
+        public IActionResult OpCalitateCreateRezultat()
+        {
+            return View();
+        }
+
     }
 }

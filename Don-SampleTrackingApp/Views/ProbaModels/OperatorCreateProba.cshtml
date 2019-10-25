@@ -10,50 +10,53 @@
 <hr />
 <div class="row">
     @*<div class="col-md-4">*@
-    <form asp-action="Create">
+    <form asp-action="OperatorCreateProba">
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group hide">
             <label asp-for="DataPrelevare" class="control-label"></label>
-            <input asp-for="DataPrelevare" class="form-control" value="-"/>
+            <input asp-for="DataPrelevare" class="form-control" value="-" />
             <span asp-validation-for="DataPrelevare" class="text-danger"></span>
         </div>
         <div class="form-group col-lg-1">
             <label asp-for="SiglaFurnizor" class="control-label"></label>
-            <input asp-for="SiglaFurnizor" class="form-control"/>
+            <input asp-for="SiglaFurnizor" class="form-control" />
             <span asp-validation-for="SiglaFurnizor" class="text-danger"></span>
         </div>
-        <div class="form-group col-lg-1">
-            <label asp-for="Sarja" class="control-label"></label>
+        <div class="form-group col-lg-2">
+            <label asp-for="Sarja" class="control-label fix-height"></label>
             <input asp-for="Sarja" class="form-control" />
             <span asp-validation-for="Sarja" class="text-danger"></span>
         </div>
         <div class="form-group col-lg-1">
-            <label asp-for="Diametru" class="control-label"></label>
+            <label asp-for="Diametru" class="control-label fix-height"></label>
             <input asp-for="Diametru" class="form-control" />
             <span asp-validation-for="Diametru" class="text-danger"></span>
         </div>
-        <div class="form-group col-lg-1">
-            <label asp-for="Calitate" class="control-label"></label>
+        <div class="form-group col-lg-2">
+            <label asp-for="Calitate" class="control-label fix-height"></label>
             <input asp-for="Calitate" class="form-control" />
             <span asp-validation-for="Calitate" class="text-danger"></span>
         </div>
         <div class="form-group col-lg-1">
-            <label asp-for="NumarCuptor" class="control-label"></label>
+            <label asp-for="NumarCuptor" class="control-label fix-height"></label>
             <input asp-for="NumarCuptor" class="form-control" />
             <span asp-validation-for="NumarCuptor" class="text-danger"></span>
         </div>
         <div class="form-group col-lg-1">
-            <label asp-for="TipTratamentTermic" class="control-label"></label>
+            <label asp-for="TipTratamentTermic" class="control-label fix-height"></label>
             <select asp-for="TipTratamentTermic" class="form-control" asp-items="Html.GetEnumSelectList<TipTT>()"></select>
             <span asp-validation-for="TipTratamentTermic" class="text-danger"></span>
         </div>
         <div class="form-group col-lg-1">
-            <label asp-for="TipCapBara" class="control-label"></label>
+            <label asp-for="TipCapBara" class="control-label fix-height"></label>
             <select asp-for="TipCapBara" class="form-control" asp-items="Html.GetEnumSelectList<CapBara>()"></select>
             <span asp-validation-for="TipCapBara" class="text-danger"></span>
         </div>
-        <div class="form-group col-lg-1">
-            <label asp-for="Tipproba" class="control-label"></label>
+        <div class="form-group col-lg-2">
+            <label asp-for="Tipproba" class="control-label fix-height"></label>
             <select asp-for="Tipproba" class="form-control" asp-items="Html.GetEnumSelectList<TipProba>()"></select>
             <span asp-validation-for="Tipproba" class="text-danger"></span>
         </div>
@@ -69,17 +72,17 @@
         </div>
         <div class="form-group hide">
             <label asp-for="DataPreluare" class="control-label"></label>
-            <input asp-for="DataPreluare" class="form-control" value="-"/>
+            <input asp-for="DataPreluare" class="form-control" value="-" />
             <span asp-validation-for="DataPreluare" class="text-danger"></span>
         </div>
         <div class="form-group hide">
             <label asp-for="DataRaspunsCalitate" class="control-label"></label>
-            <input asp-for="DataRaspunsCalitate" class="form-control" value="-"/>
+            <input asp-for="DataRaspunsCalitate" class="form-control" value="-" />
             <span asp-validation-for="DataRaspunsCalitate" class="text-danger"></span>
         </div>
         <div class="form-group hide">
             <label asp-for="NumeUtilizatorCalitate" class="control-label"></label>
-            <input asp-for="NumeUtilizatorCalitate" class="form-control" value="-"/>
+            <input asp-for="NumeUtilizatorCalitate" class="form-control" value="-" />
             <span asp-validation-for="NumeUtilizatorCalitate" class="text-danger"></span>
         </div>
         <div class="form-group hide">
@@ -89,37 +92,35 @@
         </div>
         <div class="form-group hide">
             <label asp-for="KV1" class="control-label"></label>
-            <input asp-for="KV1" class="form-control" value=0/>
+            <input asp-for="KV1" class="form-control" value=0 />
             <span asp-validation-for="KV1" class="text-danger"></span>
         </div>
         <div class="form-group hide">
             <label asp-for="KV2" class="control-label"></label>
-            <input asp-for="KV2" class="form-control" value=0/>
+            <input asp-for="KV2" class="form-control" value=0 />
             <span asp-validation-for="KV2" class="text-danger"></span>
         </div>
         <div class="form-group hide">
             <label asp-for="KV3" class="control-label"></label>
-            <input asp-for="KV3" class="form-control" value=0/>
+            <input asp-for="KV3" class="form-control" value=0 />
             <span asp-validation-for="KV3" class="text-danger"></span>
         </div>
         <div class="form-group hide">
             <label asp-for="Temperatura" class="control-label"></label>
-            <input asp-for="Temperatura" class="form-control" value=0/>
+            <input asp-for="Temperatura" class="form-control" value=0 />
             <span asp-validation-for="Temperatura" class="text-danger"></span>
         </div>
         <div class="form-group hide">
             <label asp-for="DuritateHB" class="control-label"></label>
-            <input asp-for="DuritateHB" class="form-control" value=0/>
+            <input asp-for="DuritateHB" class="form-control" value=0 />
             <span asp-validation-for="DuritateHB" class="text-danger"></span>
         </div>
         <div class="form-group hide">
             <label asp-for="ObservatiiCalitate" class="control-label"></label>
-            <input asp-for="ObservatiiCalitate" class="form-control" value="-"/>
+            <input asp-for="ObservatiiCalitate" class="form-control" value="-" />
             <span asp-validation-for="ObservatiiCalitate" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
+
     </form>
     @*</div>*@
 </div>
