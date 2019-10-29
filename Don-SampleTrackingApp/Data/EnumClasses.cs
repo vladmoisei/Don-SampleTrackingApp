@@ -14,7 +14,7 @@ namespace Don_SampleTrackingApp
     {
         Toate,
         ProbaIntrodusa,
-        ProbaPrelevata,
+        ProbaPreluata,
         ProbaRezultat,
         ProbaRNC
     }
