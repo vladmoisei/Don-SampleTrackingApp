@@ -42,20 +42,41 @@ namespace Don_SampleTrackingApp
         // Functie verificare data cuprinse intre 2 date (format string) 
         public static bool IsDateBetween(string dataItemString, string dataFromString, string dataToString)
         {
-            // Convert string data received from View to DateTime format
-            DateTime dataItem = Auxiliar.ReturnareDataFromString(dataItemString);
-            DateTime dataFrom = Auxiliar.ReturnareDataFromString(dataFromString + " 00:00:00");
-            DateTime dataTo = Auxiliar.ReturnareDataFromString(dataToString + " 00:00:00");
-            if (dataItem.CompareTo(dataFrom) >= 0)
+            try
             {
-                if (dataItem.CompareTo(dataTo) <= 0)
+                // Convert string data received from View to DateTime format
+                DateTime dataItem = Auxiliar.ReturnareDataFromString(dataItemString);
+                DateTime dataFrom = Auxiliar.ReturnareDataFromString(dataFromString + " 00:00:00");
+                DateTime dataTo = Auxiliar.ReturnareDataFromString(dataToString + " 00:00:00");
+                if (dataItem.CompareTo(dataFrom) >= 0)
                 {
-                    return true;
+                    if (dataItem.CompareTo(dataTo) <= 0)
+                    {
+                        return true;
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+                return false; ;
+            }
+
+
             return false;
         }
 
+        // Functie returnare data maine format scurt + 1 zi
+        public static string GetTomorrowDate()
+        {
+            return DateTime.Now.AddDays(1).ToString("dd.MM.yyyy");
+        }
+
+        // Functie returnare data cu o luna in urma
+        public static string GetOneMonthBeforeDate()
+        {
+            return DateTime.Now.AddMonths(-1).ToString("dd.MM.yyyy");
+        }
 
     }
 }

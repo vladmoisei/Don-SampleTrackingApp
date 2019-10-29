@@ -22,14 +22,20 @@ namespace Don_SampleTrackingApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ProbaModels.ToListAsync());
+            ViewBag.dataFrom = Auxiliar.GetOneMonthBeforeDate();
+            ViewBag.dataTo = Auxiliar.GetTomorrowDate();
+            List<ProbaModel> ListaSql = await _context.ProbaModels.ToListAsync();
+            IEnumerable<ProbaModel> ListaDeAfisat = ListaSql.Where(item => Auxiliar.IsDateBetween(item.DataPrelevare, ViewBag.dataFrom, ViewBag.dataTo));
+            return View(ListaDeAfisat);
         }
 
         // POST: ProbaModels
         // Afisam doar datele pe care le selecteaza utilizatorul sa le afiseze
         [HttpPost]
-        public async Task<IActionResult> _Index(DateProbaDeAfisat selectieAfisareDate)
+        public async Task<IActionResult> _Index(DateProbaDeAfisat selectieAfisareDate, string dataFrom, string dataTo)
         {
+            if (dataFrom == null) dataFrom = Auxiliar.GetOneMonthBeforeDate();
+            if (dataTo == null) dataTo = Auxiliar.GetTomorrowDate();
             IEnumerable<ProbaModel> ListaDeAfisat = await _context.ProbaModels.ToListAsync();
             switch (selectieAfisareDate)
             {
@@ -56,7 +62,7 @@ namespace Don_SampleTrackingApp.Controllers
                 default:
                     break;
             }
-            return PartialView(ListaDeAfisat);            
+            return PartialView(ListaDeAfisat.Where(item => Auxiliar.IsDateBetween(item.DataPrelevare, dataFrom, dataTo)));            
             // return View(await _context.ProbaModels.ToListAsync());
         }
 
@@ -93,6 +99,7 @@ namespace Don_SampleTrackingApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                probaModel.DataPrelevare = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
                 _context.Add(probaModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -208,6 +215,7 @@ namespace Don_SampleTrackingApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                probaModel.DataPrelevare = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
                 _context.Add(probaModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -248,6 +256,7 @@ namespace Don_SampleTrackingApp.Controllers
             {
                 try
                 {
+                    probaModel.DataRaspunsCalitate = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
                     _context.Update(probaModel);
                     await _context.SaveChangesAsync();
                 }

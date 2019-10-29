@@ -5,11 +5,26 @@
 }
 
 <h2>Index</h2>
-<p>
-    Selecteaza datele de afisat:
-    <label class="control-label"></label>
-    <select class="form-control" id="selectieAfisareDate" asp-items="Html.GetEnumSelectList<DateProbaDeAfisat>()"></select>
-</p>
+<div class="row">
+    <div class="col-lg-6">
+        <p>
+            Selecteaza datele de afisat:
+            <label class="control-label"></label>
+            <select class="form-control" id="selectieAfisareDate" asp-items="Html.GetEnumSelectList<DateProbaDeAfisat>()"></select>
+        </p>
+    </div>
+    <div class="col-lg-6">
+        <p>Selectare perioada raportare in excel</p>
+        <label for="from">From</label>
+        <input type="text" id="from" name="from" placeholder=@ViewBag.dataFrom>
+        <label for="to">to</label>
+        <input type="text" id="to" name="to" placeholder=@ViewBag.dataTo>
+        <p>
+            <a id="downloadToExcel" asp-action="ExportToExcelAsync">Exporta in excel</a>
+        </p>
+    </div>
+</div>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -167,4 +182,14 @@
 
 @section Scripts {
     <script src="~/js/AfisareDate.js"></script>
+}
+
+@* Section for UI Datepicker from Jquery*@
+@section JQueryUI
+    {
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*@
+    @*<link rel="stylesheet" href="/resources/demos/style.css">*@
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/js/datepickerJquery.js"></script>
 }
