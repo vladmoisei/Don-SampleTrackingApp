@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Don_SampleTrackingApp;
 using System.IO;
 using OfficeOpenXml;
+using Microsoft.AspNetCore.Http;
 
 namespace Don_SampleTrackingApp.Controllers
 {
@@ -24,6 +25,13 @@ namespace Don_SampleTrackingApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            // Salvez in ViewBag userName si Rol pentru a folosi in View
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            ViewBag.Rol = HttpContext.Session.GetString("Rol");
+            // Daca nu e logat redirectionez la Pagina de Login 
+            if (ViewBag.UserName == null) return RedirectToAction("Index", "Home");
+
+            // Logiga afisare date doar pt o luna inainte
             ViewBag.dataFrom = Auxiliar.GetOneMonthBeforeDate();
             ViewBag.dataTo = Auxiliar.GetTomorrowDate();
             List<ProbaModel> ListaSql = await _context.ProbaModels.ToListAsync();
@@ -31,11 +39,19 @@ namespace Don_SampleTrackingApp.Controllers
             return View(ListaDeAfisat);
         }
 
-        // POST: ProbaModels
+        // Partial View Return
+        // POST: ProbaModels 
         // Afisam doar datele pe care le selecteaza utilizatorul sa le afiseze
         [HttpPost]
         public async Task<IActionResult> _Index(DateProbaDeAfisat selectieAfisareDate, string dataFrom, string dataTo)
         {
+            // Salvez in ViewBag userName si Rol pentru a folosi in View
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            ViewBag.Rol = HttpContext.Session.GetString("Rol");
+            // Daca nu e logat redirectionez la Pagina de Login 
+            if (ViewBag.UserName == null) return RedirectToAction("Index", "Home");
+
+            // Modific datele de afisat in functie de selectie din View
             if (dataFrom == null) dataFrom = Auxiliar.GetOneMonthBeforeDate();
             if (dataTo == null) dataTo = Auxiliar.GetTomorrowDate();
             IEnumerable<ProbaModel> ListaDeAfisat = await _context.ProbaModels.ToListAsync();
@@ -89,6 +105,11 @@ namespace Don_SampleTrackingApp.Controllers
         // GET: ProbaModels/Create
         public IActionResult Create()
         {
+            // Salvez in ViewBag userName si Rol pentru a folosi in View
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            ViewBag.Rol = HttpContext.Session.GetString("Rol");
+            // Daca nu e logat redirectionez la Pagina de Login 
+            if (ViewBag.UserName == null) return RedirectToAction("Index", "Home");
             return View();
         }
 
@@ -99,6 +120,12 @@ namespace Don_SampleTrackingApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProbaModelId,DataPrelevare,SiglaFurnizor,Sarja,Diametru,Calitate,NumarCuptor,TipTratamentTermic,TipCapBara,Tipproba,UserName,ObservatiiOperator,DataPreluare,DataRaspunsCalitate,NumeUtilizatorCalitate,RezultatProba,KV1,KV2,KV3,Temperatura,DuritateHB,ObservatiiCalitate")] ProbaModel probaModel)
         {
+            // Salvez in ViewBag userName si Rol pentru a folosi in View
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            ViewBag.Rol = HttpContext.Session.GetString("Rol");
+            // Daca nu e logat redirectionez la Pagina de Login 
+            if (ViewBag.UserName == null) return RedirectToAction("Index", "Home");
+
             if (ModelState.IsValid)
             {
                 probaModel.DataPrelevare = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
@@ -205,6 +232,12 @@ namespace Don_SampleTrackingApp.Controllers
         // GET: ProbaModels/Create
         public IActionResult OperatorCreateProba()
         {
+            // Salvez in ViewBag userName si Rol pentru a folosi in View
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            ViewBag.Rol = HttpContext.Session.GetString("Rol");
+            // Daca nu e logat redirectionez la Pagina de Login 
+            if (ViewBag.UserName == null) return RedirectToAction("Index", "Home");
+
             return View();
         }
 
@@ -229,6 +262,12 @@ namespace Don_SampleTrackingApp.Controllers
         // GET: ProbaModels/Edit/5
         public async Task<IActionResult> OpCalitateCreateRezultat(int? id)
         {
+            // Salvez in ViewBag userName si Rol pentru a folosi in View
+            ViewBag.UserName = HttpContext.Session.GetString("UserName");
+            ViewBag.Rol = HttpContext.Session.GetString("Rol");
+            // Daca nu e logat redirectionez la Pagina de Login 
+            if (ViewBag.UserName == null) return RedirectToAction("Index", "Home");
+
             if (id == null)
             {
                 return NotFound();
@@ -292,7 +331,7 @@ namespace Don_SampleTrackingApp.Controllers
 
             using (var pck = new ExcelPackage(stream))
             {
-                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Cuptor");
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
                 ws.Cells["A1:Z1"].Style.Font.Bold = true;
 
                 ws.Cells["A1"].Value = "Id";
@@ -352,7 +391,7 @@ namespace Don_SampleTrackingApp.Controllers
                 pck.Save();
             }
             stream.Position = 0;
-            string excelName = "RaportGazCuptor.xlsx";
+            string excelName = "RaportTrackingMostre.xlsx";
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
 
         }

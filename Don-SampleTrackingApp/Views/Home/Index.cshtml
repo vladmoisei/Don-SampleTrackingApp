@@ -1,4 +1,56 @@
 ﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container body-content">
+
+    <h2>Log in</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <section>
+                <form id="account" method="post" novalidate="novalidate">
+                    <h4>Folositi contul dumneavoastra pentru a va inregistra.</h4>
+                    <hr>
+                    <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
+                        <ul>
+                            <li style="display:none"></li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="UserName">Nume Utilizator:</label>
+                        <input class="form-control" id="UserName" name="UserName" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Parola:</label>
+                        <input type="password" class="form-control" id="Password" name="Password" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Log in</button>
+                    </div>
+                    @if (ViewBag.UserName == "")
+                    {
+                        <div id="alertaUsernameGresit" class="alert-danger">User Name gresit.</div>
+                    }
+                    @if (ViewBag.Password == "")
+                    {
+                        <div id="alertaParolaGresita" class="alert-danger">Parola gresita.</div>
+                    }
+
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+@*<div id="Login.NumeUtilizatorGresit">Nume utilizator gresit: @Model.NumeUtilizatorGresit</div>
+    <div id="Login.ParolaGresita">Parola gresita: @Model.ParolaGresita</div>*@
+
+
+
+Creade mine prima data
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
