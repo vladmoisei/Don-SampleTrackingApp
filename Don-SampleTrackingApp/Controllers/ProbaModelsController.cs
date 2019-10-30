@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Don_SampleTrackingApp;
+using System.IO;
+using OfficeOpenXml;
 
 namespace Don_SampleTrackingApp.Controllers
 {
@@ -274,6 +276,85 @@ namespace Don_SampleTrackingApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(probaModel);
+        }
+
+
+        // Functie exportare data to excel file
+        public async Task<IActionResult> ExportToExcelAsync(string dataFrom, string dataTo)
+        {
+            //return Content(dataFrom + "<==>" + dataTo);
+            List<ProbaModel> listaExcel = await _context.ProbaModels.ToListAsync();
+            
+            // Extrage datele cuprinse intre limitele date de operator
+            IEnumerable<ProbaModel> listaDeAfisat = listaExcel.Where(model => Auxiliar.IsDateBetween(model.DataPrelevare, dataFrom, dataTo));
+
+            var stream = new MemoryStream();
+
+            using (var pck = new ExcelPackage(stream))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Cuptor");
+                ws.Cells["A1:Z1"].Style.Font.Bold = true;
+
+                ws.Cells["A1"].Value = "Id";
+                ws.Cells["B1"].Value = "Data prelevare";
+                ws.Cells["C1"].Value = "Sigla furnizor";
+                ws.Cells["D1"].Value = "Sarja";
+                ws.Cells["E1"].Value = "Diametru";
+                ws.Cells["F1"].Value = "Calitate";
+                ws.Cells["G1"].Value = "Nr cuptor";
+                ws.Cells["H1"].Value = "Tip Tratament Termic";
+                ws.Cells["I1"].Value = "Cap bara";
+                ws.Cells["J1"].Value = "Tip proba";
+                ws.Cells["K1"].Value = "User name";
+                ws.Cells["L1"].Value = "Obs operator";
+                ws.Cells["M1"].Value = "Data preluare";
+                ws.Cells["N1"].Value = "Data raspuns";
+                ws.Cells["O1"].Value = "User name calitate";
+                ws.Cells["P1"].Value = "Rezultat proba";
+                ws.Cells["Q1"].Value = "KV1";
+                ws.Cells["R1"].Value = "KV2";
+                ws.Cells["S1"].Value = "KV3";
+                ws.Cells["T1"].Value = "Temperatura";
+                ws.Cells["U1"].Value = "Duritate HB";
+                ws.Cells["V1"].Value = "Obs Calitate";
+
+                int rowStart = 2;
+                foreach (var elem in listaDeAfisat)
+                {
+                    ws.Cells[string.Format("A{0}", rowStart)].Value = elem.ProbaModelId;
+                    ws.Cells[string.Format("B{0}", rowStart)].Value = elem.DataPrelevare;
+                    ws.Cells[string.Format("C{0}", rowStart)].Value = elem.SiglaFurnizor;
+                    ws.Cells[string.Format("D{0}", rowStart)].Value = elem.Sarja;
+                    ws.Cells[string.Format("E{0}", rowStart)].Value = elem.Diametru;
+                    ws.Cells[string.Format("F{0}", rowStart)].Value = elem.Calitate;
+                    ws.Cells[string.Format("G{0}", rowStart)].Value = elem.NumarCuptor;
+                    ws.Cells[string.Format("H{0}", rowStart)].Value = elem.TipTratamentTermic;
+                    ws.Cells[string.Format("I{0}", rowStart)].Value = elem.TipCapBara;
+                    ws.Cells[string.Format("J{0}", rowStart)].Value = elem.Tipproba;
+                    ws.Cells[string.Format("K{0}", rowStart)].Value = elem.UserName;
+                    ws.Cells[string.Format("L{0}", rowStart)].Value = elem.ObservatiiOperator;
+                    ws.Cells[string.Format("M{0}", rowStart)].Value = elem.DataPreluare;
+                    ws.Cells[string.Format("N{0}", rowStart)].Value = elem.DataRaspunsCalitate;
+                    ws.Cells[string.Format("O{0}", rowStart)].Value = elem.NumeUtilizatorCalitate;
+                    ws.Cells[string.Format("P{0}", rowStart)].Value = elem.RezultatProba;
+                    ws.Cells[string.Format("Q{0}", rowStart)].Value = elem.KV1;
+                    ws.Cells[string.Format("R{0}", rowStart)].Value = elem.KV2;
+                    ws.Cells[string.Format("S{0}", rowStart)].Value = elem.KV3;
+                    ws.Cells[string.Format("T{0}", rowStart)].Value = elem.Temperatura;
+                    ws.Cells[string.Format("U{0}", rowStart)].Value = elem.DuritateHB;
+                    ws.Cells[string.Format("V{0}", rowStart)].Value = elem.ObservatiiCalitate;
+
+                    rowStart++;
+                }
+
+                ws.Cells["A:AZ"].AutoFitColumns();
+
+                pck.Save();
+            }
+            stream.Position = 0;
+            string excelName = "RaportGazCuptor.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+
         }
 
     }
