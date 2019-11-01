@@ -318,6 +318,39 @@ namespace Don_SampleTrackingApp.Controllers
         }
 
 
+        // Functie Setare data preluare proba de catre operator calitate
+        // prin bifarea checkBox
+        // Actualizare text si inlocuire checkBox prin Ajax call
+        public async Task<IActionResult> CheckBoxDataPreluareProbaEvent (int probaId)
+        {
+            var probaModel = await _context.ProbaModels.FindAsync(probaId);
+            if (probaModel == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                probaModel.DataPreluare = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+                _context.Update(probaModel);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProbaModelExists(probaModel.ProbaModelId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return  Json(new { Id = probaModel.ProbaModelId, Data = probaModel.DataPreluare });
+            //return RedirectToAction(nameof(_Index));
+        }
+
+
         // Functie exportare data to excel file
         public async Task<IActionResult> ExportToExcelAsync(string dataFrom, string dataTo)
         {

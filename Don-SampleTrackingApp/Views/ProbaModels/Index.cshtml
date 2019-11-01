@@ -19,15 +19,29 @@
         <input type="text" id="from" name="from" placeholder=@ViewBag.dataFrom>
         <label for="to">to</label>
         <input type="text" id="to" name="to" placeholder=@ViewBag.dataTo>
-        <p>
-            <a id="downloadToExcel" asp-action="ExportToExcelAsync">Exporta in excel</a>
-        </p>
+        @if (ViewBag.Rol != "Operator")
+        {
+            <p>
+                <a id="downloadToExcel" asp-action="ExportToExcelAsync">Exporta in excel</a>
+            </p>
+        }
     </div>
 </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (ViewBag.Rol == "Operator")
+{
+    <p>
+        <a asp-controller="ProbaModels"
+           asp-action="Operatorcreateproba">Create New</a>
+    </p>
+}
+@if (ViewBag.Rol == "Admin")
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -140,9 +154,29 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ObservatiiOperator)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataPreluare)
-                </td>
+                @if (ViewBag.Rol != "OperatorCalitate")
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataPreluare)
+                    </td>
+                }
+                else
+                {
+                    if (item.DataPreluare != "-")
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataPreluare)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @*<h3 onclick='javascript:alert(1);try{checkBoxEvent()}catch(e){alert(e)}'>ID: @item.ProbaModelId</h3>
+                            <input type="text" onchange="this.innerHTML='OOOps'" value="PRoba"/>*@
+                            <input type="checkbox" value="@item.ProbaModelId"/>
+                        </td>
+                    }
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.DataRaspunsCalitate)
                 </td>
@@ -170,11 +204,22 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ObservatiiCalitate)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ProbaModelId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ProbaModelId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ProbaModelId">Delete</a>
-                </td>
+                @if (ViewBag.Rol == "Admin")
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ProbaModelId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ProbaModelId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ProbaModelId">Delete</a>
+                    </td>
+                }
+                @if (ViewBag.Rol == "OperatorCalitate")
+                {
+                    <td>
+                        <a asp-action="OpCalitateCreateRezultat" asp-route-id="@item.ProbaModelId">Create</a> |
+                        <a asp-action="Details" asp-route-id="@item.ProbaModelId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ProbaModelId">Delete</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

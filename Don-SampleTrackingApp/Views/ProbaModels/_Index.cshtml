@@ -78,79 +78,110 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProbaModelId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataPrelevare)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SiglaFurnizor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sarja)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Diametru)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Calitate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumarCuptor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipTratamentTermic)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipCapBara)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tipproba)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ObservatiiOperator)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProbaModelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPrelevare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiglaFurnizor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sarja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diametru)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumarCuptor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipTratamentTermic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipCapBara)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipproba)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObservatiiOperator)
+            </td>
+            @if (ViewBag.Rol != "OperatorCalitate")
+            {
                 <td>
                     @Html.DisplayFor(modelItem => item.DataPreluare)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataRaspunsCalitate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumeUtilizatorCalitate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RezultatProba)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.KV1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.KV2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.KV3)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Temperatura)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DuritateHB)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ObservatiiCalitate)
-                </td>
+            }
+            else
+            {
+                if (item.DataPreluare != "-")
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataPreluare)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @*<h3 onclick='javascript:alert(1);try{checkBoxEvent()}catch(e){alert(e)}'>ID: @item.ProbaModelId</h3>
+                        <input type="text" onchange="this.innerHTML='OOOps'" value="PRoba" />*@
+                        <input type="checkbox" value="@item.ProbaModelId" />
+                    </td>
+                }
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.DataRaspunsCalitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeUtilizatorCalitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RezultatProba)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KV1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KV2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KV3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DuritateHB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObservatiiCalitate)
+            </td>
+            @if (ViewBag.Rol == "Admin")
+            {
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ProbaModelId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ProbaModelId">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.ProbaModelId">Delete</a>
                 </td>
-            </tr>
+            }
+            @if (ViewBag.Rol == "OperatorCalitate")
+            {
+                <td>
+                    <a asp-action="OpCalitateCreateRezultat" asp-route-id="@item.ProbaModelId">Create</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProbaModelId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProbaModelId">Delete</a>
+                </td>
+            }
+        </tr>
         }
     </tbody>
 

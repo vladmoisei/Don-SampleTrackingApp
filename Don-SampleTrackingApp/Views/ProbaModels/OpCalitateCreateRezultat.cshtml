@@ -71,7 +71,7 @@
                 <input asp-for="ObservatiiOperator" class="form-control" />
                 <span asp-validation-for="ObservatiiOperator" class="text-danger"></span>
             </div>
-            <div class="form-group col-lg-2">
+            <div class="form-group col-lg-2 hide">
                 <label asp-for="DataPreluare" class="control-label"></label>
                 <input asp-for="DataPreluare" class="form-control" />
                 <span asp-validation-for="DataPreluare" class="text-danger"></span>
@@ -83,7 +83,7 @@
             </div>
             <div class="form-group hide">
                 <label asp-for="NumeUtilizatorCalitate" class="control-label"></label>
-                <input asp-for="NumeUtilizatorCalitate" class="form-control" />
+                <input asp-for="NumeUtilizatorCalitate" class="form-control" value=@ViewBag.UserName/>
                 <span asp-validation-for="NumeUtilizatorCalitate" class="text-danger"></span>
             </div>
             <div class="form-group col-lg-1">
