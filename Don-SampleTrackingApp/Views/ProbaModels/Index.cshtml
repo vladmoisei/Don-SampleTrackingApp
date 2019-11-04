@@ -19,12 +19,10 @@
         <input type="text" id="from" name="from" placeholder=@ViewBag.dataFrom>
         <label for="to">to</label>
         <input type="text" id="to" name="to" placeholder=@ViewBag.dataTo>
-        @if (ViewBag.Rol != "Operator")
-        {
-            <p>
-                <a id="downloadToExcel" asp-action="ExportToExcelAsync">Exporta in excel</a>
-            </p>
-        }
+        <p>
+            <a id="downloadToExcel" asp-action="ExportToExcelAsync">Exporta in excel</a>
+        </p>
+        <input id="userRol" type="text" class="hide" value="@ViewBag.Rol" />
     </div>
 </div>
 
@@ -172,8 +170,8 @@
                     {
                         <td>
                             @*<h3 onclick='javascript:alert(1);try{checkBoxEvent()}catch(e){alert(e)}'>ID: @item.ProbaModelId</h3>
-                            <input type="text" onchange="this.innerHTML='OOOps'" value="PRoba"/>*@
-                            <input type="checkbox" value="@item.ProbaModelId"/>
+                                <input type="text" onchange="this.innerHTML='OOOps'" value="PRoba"/>*@
+                            <input type="checkbox" value="@item.ProbaModelId" />
                         </td>
                     }
                 }

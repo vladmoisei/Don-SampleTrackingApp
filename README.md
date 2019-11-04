@@ -16,4 +16,4 @@ App to store samples data in SQL Server.  The data is submitted by the operators
 * Asp.Net Core App
 
 # Nuget Sources
-* - S7netplus - to write to Siemens Plc
+* - EPPlus - to create excel files

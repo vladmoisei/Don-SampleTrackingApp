@@ -11,6 +11,7 @@
     // Verificare daca este small screen
     let isSmallScren = (screen.width <= 700) ? "True" : "False";
 
+    hideExportLinkToOperator();
     /* Adaugare Event la elelement selectie afisare date in functie de selectie
      * Toate
      * Cele introduse de operator
@@ -112,7 +113,16 @@
         parinteCheckBox.innerHTML = data;
     }
 
+    // Functie si ascundere link exportToExcelFile la user cu rol de Operator    
+    function hideExportLinkToOperator() {
+        let userRol = document.getElementById("userRol").value;
+        if (userRol === "Operator") {
+            linkElement = document.getElementById("downloadToExcel");
+            linkElement.classList.add("hide");
+        }
+    }
     
+
     //// Adaugare Event la Element DataTo, cand se schimba data se afiseaza doar in data selectata
     //dataToElement.addEventListener('change', function () {
     //    alert("S-a schimbat data To. EventListener");
