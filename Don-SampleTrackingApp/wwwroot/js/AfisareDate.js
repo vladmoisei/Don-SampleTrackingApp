@@ -1,13 +1,15 @@
 ﻿$(document).ready(function () {
     console.log("Ruleaza Java Script");
 
+
     // Creare element lista selectie afisare date
     let selectieAfisareDateElement = document.getElementById("selectieAfisareDate");
     // Creare element DataTo
     let dataToElement = document.getElementById("to");
     // Element DataFrom
     let dataFromElement = document.getElementById("from");
-
+    // Verificare daca este small screen
+    let isSmallScren = (screen.width <= 700) ? "True" : "False";
 
     /* Adaugare Event la elelement selectie afisare date in functie de selectie
      * Toate
@@ -24,7 +26,8 @@
             data: {
                 selectieAfisareDate: this.value,
                 dataFrom: dataFromElement.value,
-                dataTo: dataToElement.value
+                dataTo: dataToElement.value,
+                ecranMic: isSmallScren
             },
             success: function (response) {
                 console.log("S-a realizat event selectie date");
@@ -109,6 +112,7 @@
         parinteCheckBox.innerHTML = data;
     }
 
+    
     //// Adaugare Event la Element DataTo, cand se schimba data se afiseaza doar in data selectata
     //dataToElement.addEventListener('change', function () {
     //    alert("S-a schimbat data To. EventListener");

@@ -4,26 +4,32 @@
 @model IEnumerable<Don_SampleTrackingApp.ProbaModel>
 
 
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProbaModelId)
-            </th>
+<thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProbaModelId)
+        </th>
+        @if (ViewBag.IsMallScreen == "False")
+        {
             <th>
                 @Html.DisplayNameFor(model => model.DataPrelevare)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SiglaFurnizor)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sarja)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Diametru)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Calitate)
-            </th>
+        }
+
+        <th>
+            @Html.DisplayNameFor(model => model.Sarja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diametru)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Calitate)
+        </th>
+        @if (ViewBag.IsMallScreen == "False")
+        {
             <th>
                 @Html.DisplayNameFor(model => model.NumarCuptor)
             </th>
@@ -33,18 +39,24 @@
             <th>
                 @Html.DisplayNameFor(model => model.TipCapBara)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipproba)
-            </th>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.Tipproba)
+        </th>
+        @if (ViewBag.IsMallScreen == "False")
+        {
             <th>
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ObservatiiOperator)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataPreluare)
-            </th>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.DataPreluare)
+        </th>
+        @if (ViewBag.IsMallScreen == "False")
+        {
             <th>
                 @Html.DisplayNameFor(model => model.DataRaspunsCalitate)
             </th>
@@ -73,21 +85,25 @@
                 @Html.DisplayNameFor(model => model.ObservatiiCalitate)
             </th>
             <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+        }
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ProbaModelId)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPrelevare)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SiglaFurnizor)
-            </td>
+            @if (ViewBag.IsMallScreen == "False")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataPrelevare)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiglaFurnizor)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Sarja)
             </td>
@@ -97,24 +113,30 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Calitate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumarCuptor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipTratamentTermic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipCapBara)
-            </td>
+            @if (ViewBag.IsMallScreen == "False")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumarCuptor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipTratamentTermic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipCapBara)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Tipproba)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ObservatiiOperator)
-            </td>
+            @if (ViewBag.IsMallScreen == "False")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObservatiiOperator)
+                </td>
+            }
             @if (ViewBag.Rol != "OperatorCalitate")
             {
                 <td>
@@ -133,38 +155,41 @@
                 {
                     <td>
                         @*<h3 onclick='javascript:alert(1);try{checkBoxEvent()}catch(e){alert(e)}'>ID: @item.ProbaModelId</h3>
-                        <input type="text" onchange="this.innerHTML='OOOps'" value="PRoba" />*@
+                            <input type="text" onchange="this.innerHTML='OOOps'" value="PRoba" />*@
                         <input type="checkbox" value="@item.ProbaModelId" />
                     </td>
                 }
             }
-            <td>
-                @Html.DisplayFor(modelItem => item.DataRaspunsCalitate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeUtilizatorCalitate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RezultatProba)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KV1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KV2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KV3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Temperatura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DuritateHB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ObservatiiCalitate)
-            </td>
+            @if (ViewBag.IsMallScreen == "False")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataRaspunsCalitate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeUtilizatorCalitate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RezultatProba)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KV1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KV2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KV3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperatura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DuritateHB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObservatiiCalitate)
+                </td>
+            }
             @if (ViewBag.Rol == "Admin")
             {
                 <td>
@@ -182,8 +207,8 @@
                 </td>
             }
         </tr>
-        }
-    </tbody>
+    }
+</tbody>
 
 
 @section Scripts {

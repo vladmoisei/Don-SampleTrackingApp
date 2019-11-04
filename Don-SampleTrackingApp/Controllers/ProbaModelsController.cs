@@ -43,8 +43,9 @@ namespace Don_SampleTrackingApp.Controllers
         // POST: ProbaModels 
         // Afisam doar datele pe care le selecteaza utilizatorul sa le afiseze
         [HttpPost]
-        public async Task<IActionResult> _Index(DateProbaDeAfisat selectieAfisareDate, string dataFrom, string dataTo)
+        public async Task<IActionResult> _Index(DateProbaDeAfisat selectieAfisareDate, string dataFrom, string dataTo, string ecranMic)
         {
+            ViewBag.IsMallScreen = ecranMic;
             // Salvez in ViewBag userName si Rol pentru a folosi in View
             ViewBag.UserName = HttpContext.Session.GetString("UserName");
             ViewBag.Rol = HttpContext.Session.GetString("Rol");
@@ -83,6 +84,7 @@ namespace Don_SampleTrackingApp.Controllers
             return PartialView(ListaDeAfisat.Where(item => Auxiliar.IsDateBetween(item.DataPrelevare, dataFrom, dataTo)));            
             // return View(await _context.ProbaModels.ToListAsync());
         }
+
 
         // GET: ProbaModels/Details/5
         public async Task<IActionResult> Details(int? id)

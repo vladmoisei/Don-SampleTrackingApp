@@ -2,7 +2,8 @@
 $(function () {
 
 
-
+    // Verificare daca este small screen
+    let isSmallScren = (screen.width <= 700) ? "True" : "False";
     var link = document.getElementById("downloadToExcel").getAttribute('href');
     var dataFrom;
     var dataTo;
@@ -59,7 +60,8 @@ $(function () {
                     data: {
                         selectieAfisareDate: selectieAfisareDateElement.value,
                         dataFrom: dataFrom,
-                        dataTo: dataTo
+                        dataTo: dataTo,
+                        ecranMic: isSmallScren
                     },
                     success: function (response) {
                         console.log("S-a realizat event selectie dataPicker");
