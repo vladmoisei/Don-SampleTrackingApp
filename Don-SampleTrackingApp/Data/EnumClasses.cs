@@ -59,6 +59,7 @@ namespace Don_SampleTrackingApp
     public enum Rezultat
     {
         OK,
-        RNC
+        RNC,
+        nu
     }
 }

@@ -253,6 +253,7 @@ namespace Don_SampleTrackingApp.Controllers
             if (ModelState.IsValid)
             {
                 probaModel.DataPrelevare = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+                probaModel.RezultatProba = Rezultat.nu;
                 _context.Add(probaModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
