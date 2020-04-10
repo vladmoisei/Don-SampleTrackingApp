@@ -47,3 +47,12 @@ body {
     height: 40px;
     /*line-height: 2.8;*/
 }
+
+.imagine {
+    height: 51px;
+    border-radius: 5px;
+}
+
+.navbar-header {
+    height: 72px;
+}
